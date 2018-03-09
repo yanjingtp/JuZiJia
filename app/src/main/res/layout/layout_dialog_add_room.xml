@@ -13,21 +13,25 @@
 
     <EditText
         android:id="@+id/etBuildingNO"
+        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入楼号"/>
     <EditText
         android:id="@+id/etUnit"
+        android:lines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入单元"/>
     <EditText
         android:id="@+id/etFloor"
+        android:lines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入楼层"/>
     <EditText
         android:id="@+id/etDoorplate"
+        android:lines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入门牌号"/>

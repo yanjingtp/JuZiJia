@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +12,18 @@
 
     <ListView
         android:id="@+id/lv"
+        android:layout_below="@id/layoutTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</LinearLayout>
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnAddTenant"
+        android:text="+"
+        android:background="@drawable/btn_shape"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+       android:layout_margin="30dp"/>
+
+</RelativeLayout>

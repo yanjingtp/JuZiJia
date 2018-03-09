@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="新增房客"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/etRoomNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入房间编号"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etTenantName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入租户姓名"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入租户性别"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入手机号"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etRent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入房租"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etForegift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入押金"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etProperty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入物业费"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etAmmeter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入电表度数"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etInDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入入住时间"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etNextRent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入下次交房租时间"
+            android:singleLine="true" />
+    </LinearLayout>
+</ScrollView>

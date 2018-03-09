@@ -20,6 +20,8 @@ public class Common {
 
 
     public static String tenantListUrl = "http://www.heretip.com/juzijia/getTenantInfo.php";
+    public static String addTenantUrl = "http://www.heretip.com/juzijia/addTenant.php";
+    public static String deleteTenantUrl = "http://www.heretip.com/juzijia/deleteTenant.php";
 
 
 }

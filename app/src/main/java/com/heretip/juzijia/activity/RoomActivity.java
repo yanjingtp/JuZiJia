@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -69,7 +70,6 @@ public class RoomActivity extends AppCompatActivity {
         final AlertDialog loadingDialog = new AlertDialog.Builder(this).create();
         loadingDialog.setCancelable(false);
         loadingDialog.setMessage("玩命加载中……");
-        loadingDialog.show();
         initData(area_name, loadingDialog);
 
         //添加房间
@@ -89,7 +89,6 @@ public class RoomActivity extends AppCompatActivity {
                 mDialog.setView(view);
 
 
-
                 mDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialog) {
@@ -97,9 +96,16 @@ public class RoomActivity extends AppCompatActivity {
                         mDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                addRoom(area_name, loadingDialog, etBuildingNo, etUnit, etFloor, etDoorplate);
-
-                                mDialog.dismiss();
+                                if (TextUtils.isEmpty(etBuildingNo.getText().toString())
+                                        && TextUtils.isEmpty(etUnit.getText().toString())
+                                        && TextUtils.isEmpty(etFloor.getText().toString())
+                                        && TextUtils.isEmpty(etDoorplate.getText().toString())
+                                        ) {
+                                    Toast.makeText(RoomActivity.this, "请填写房间信息", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    addRoom(area_name, loadingDialog, etBuildingNo, etUnit, etFloor, etDoorplate);
+                                    mDialog.dismiss();
+                                }
                             }
                         });
 
@@ -180,7 +186,7 @@ public class RoomActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError volleyError) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
@@ -201,7 +207,6 @@ public class RoomActivity extends AppCompatActivity {
             @Override
             public void onResponse(String s) {
 
-                Log.e("-----", s);
                 if (s.equals("1")) {
                     initData(area_name, loadingDialog);
                 }
@@ -229,7 +234,7 @@ public class RoomActivity extends AppCompatActivity {
 
     private void initData(final String area_name, final AlertDialog dialog) {
         //获取房间详情
-
+        dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Common.roomListUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {

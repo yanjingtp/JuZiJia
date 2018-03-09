@@ -59,11 +59,14 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(String s) {
                             if (s.equals("1")) {
 
+                                SharedPreferences sp = getSharedPreferences("config", Context.MODE_PRIVATE);
                                 //若是记住密码
                                 if (cbRemember.isChecked()) {
-                                    SharedPreferences sp = getSharedPreferences("config", Context.MODE_PRIVATE);
                                     sp.edit().putBoolean("isFirstLogin", false).commit();
                                 }
+                                //保存用户名
+                                sp.edit().putString("user_name", etUserName.getText().toString()).commit();
+
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
                             } else if (s.equals("2")) {

@@ -57,7 +57,7 @@ public class MyListRoomAdapter extends BaseAdapter {
         String doorplate =  mList.get(position).getDoorplate();
 
         viewHolder.tv.setText(area_name+building_no+"号楼"+uni+"单元"+floor+"楼"+doorplate);
-        viewHolder.tv.setTextSize(30);
+        viewHolder.tv.setTextSize(20);
         viewHolder.tv.setTextColor( context.getResources().getColor(R.color.colorAccent) );
 
         return convertView;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -71,7 +72,6 @@ public class AreaActivity extends AppCompatActivity {
         final AlertDialog loadingDialog = new AlertDialog.Builder(this).create();
         loadingDialog.setMessage("玩命加载中……");
         loadingDialog.setCancelable(false);
-        loadingDialog.show();
         initData(loadingDialog);
 
         //新增小区
@@ -102,9 +102,13 @@ public class AreaActivity extends AppCompatActivity {
                                     }
                                 }
 
-                                addArea(etAddArea, loadingDialog);
-                                mDialog.dismiss();
+                                if (TextUtils.isEmpty(etAddArea.getText().toString())) {
+                                    Toast.makeText(AreaActivity.this, "请填写小区信息", Toast.LENGTH_SHORT).show();
+                                } else {
 
+                                    addArea(etAddArea, loadingDialog);
+                                    mDialog.dismiss();
+                                }
                             }
 
                         });
@@ -124,8 +128,6 @@ public class AreaActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
         //gridView 短点击，进入
@@ -228,6 +230,7 @@ public class AreaActivity extends AppCompatActivity {
 
     //获取小区列表
     private void initData(final AlertDialog dialog) {
+        dialog.show();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Common.areaListUrl, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray jsonArray) {
@@ -245,8 +248,7 @@ public class AreaActivity extends AppCompatActivity {
                 //显示数据
                 MyGridAreaAdapter myGridAreaAdapter = new MyGridAreaAdapter(AreaActivity.this, mList);
                 gvArea.setAdapter(myGridAreaAdapter);
-                //关闭加载框
-                dialog.dismiss();
+
 
             }
         }, new Response.ErrorListener() {
@@ -255,7 +257,8 @@ public class AreaActivity extends AppCompatActivity {
 
             }
         });
-
+        //关闭加载框
+        dialog.dismiss();
         mQueue.add(jsonArrayRequest);
     }
 }
