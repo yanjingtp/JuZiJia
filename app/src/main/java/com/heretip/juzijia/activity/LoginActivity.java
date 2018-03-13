@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -42,6 +44,25 @@ public class LoginActivity extends AppCompatActivity {
         this.btnLogin = (Button) findViewById(R.id.btn_login);
         this.etPassword = (EditText) findViewById(R.id.et_password);
         this.etUserName = (EditText) findViewById(R.id.et_user_name);
+        final Button btnPwdSwitch = findViewById(R.id.btnPwdSwitch);
+
+        //密码的明文及密文切换
+        btnPwdSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
+                    //切换到明文
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    btnPwdSwitch.setSelected(true);
+                } else {
+                    //切换到密文
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    btnPwdSwitch.setSelected(false);
+                }
+                //光标显示到最后
+                etPassword.setSelection(etPassword.length());
+            }
+        });
 
 
         //登录

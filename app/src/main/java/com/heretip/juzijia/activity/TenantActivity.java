@@ -1,5 +1,6 @@
 package com.heretip.juzijia.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -91,8 +92,8 @@ public class TenantActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        deleteTenant(position, area_name, building_no, unit, floor, doorplate);
-                        initData(area_name, building_no, unit, floor, doorplate, dialogLoading);
+                        deleteTenant(position, area_name, building_no, unit, floor, doorplate, dialogLoading);
+
                     }
                 });
 
@@ -154,8 +155,10 @@ public class TenantActivity extends AppCompatActivity {
                                     Toast.makeText(TenantActivity.this, "请填写租户信息", Toast.LENGTH_SHORT).show();
 
                                 } else {
-                                    addTenant(area_name, building_no, unit, floor, doorplate, etRoomNo, etTenantName, etGender, etPhone, etRent, etProperty, etForegift, etAmmeter, etInDate, etNextRent);
-                                    initData(area_name, building_no, unit, floor, doorplate, dialogLoading);
+                                    addTenant(area_name, building_no, unit, floor, doorplate, etRoomNo
+                                            , etTenantName, etGender, etPhone, etRent, etProperty, etForegift
+                                            , etAmmeter, etInDate, etNextRent,dialogLoading);
+
                                     dialogAdd.dismiss();
                                 }
                             }
@@ -180,11 +183,12 @@ public class TenantActivity extends AppCompatActivity {
     }
 
     //删除房客
-    private void deleteTenant(final int position, final String area_name, final String building_no, final String unit, final String floor, final String doorplate) {
+    private void deleteTenant(final int position, final String area_name, final String building_no, final String unit, final String floor, final String doorplate, final AlertDialog dialogLoading) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Common.deleteTenantUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-
+                Log.e("-------", s);
+                initData(area_name, building_no, unit, floor, doorplate, dialogLoading);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -195,6 +199,8 @@ public class TenantActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
+                SharedPreferences sp = getSharedPreferences("config", Context.MODE_PRIVATE);
+
                 map.put("area_name", area_name);
                 map.put("building_no", building_no);
                 map.put("unit", unit);
@@ -202,6 +208,7 @@ public class TenantActivity extends AppCompatActivity {
                 map.put("doorplate", doorplate);
                 map.put("tenant_name", mList.get(position).getTenant_name());
                 map.put("phone", mList.get(position).getPhone());
+                map.put("delete_person", sp.getString("user_name", ""));
                 return map;
             }
         };
@@ -210,12 +217,15 @@ public class TenantActivity extends AppCompatActivity {
 
 
     //添加房客
-    private void addTenant(final String area_name, final String building_no, final String unit, final String floor, final String doorplate, final EditText etRoomNo, final EditText etTenantName, final EditText etGender, final EditText etPhone, final EditText etRent, final EditText etProperty, final EditText etForegift, final EditText etAmmeter, final EditText etInDate, final EditText etNextRent) {
+    private void addTenant(final String area_name, final String building_no, final String unit, final String floor
+            , final String doorplate, final EditText etRoomNo, final EditText etTenantName, final EditText etGender
+            , final EditText etPhone, final EditText etRent, final EditText etProperty, final EditText etForegift
+            , final EditText etAmmeter, final EditText etInDate, final EditText etNextRent, final AlertDialog dialogLoading) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Common.addTenantUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
 
-                Log.e("------", s);
+                initData(area_name, building_no, unit, floor, doorplate, dialogLoading);
 
             }
         }, new Response.ErrorListener() {
