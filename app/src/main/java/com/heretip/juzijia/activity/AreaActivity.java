@@ -61,12 +61,7 @@ public class AreaActivity extends AppCompatActivity {
         mQueue = Volley.newRequestQueue(AreaActivity.this);
 
         tvTitle.setText("小区");
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnBack.setVisibility(View.INVISIBLE);
 
         //加载框
         final AlertDialog loadingDialog = new AlertDialog.Builder(this).create();
